@@ -53,7 +53,7 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
   Widget get locationArea => SizedBox(
       height: dynamicHeight(0.05),
       child: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
+        padding: const EdgeInsets.only(left: 8.0,top: 2),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
