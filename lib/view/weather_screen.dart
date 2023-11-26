@@ -102,10 +102,10 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("${double.parse(viewModel.currentWeatherData[DateTime.now().weekday - 1].degree ?? "").round()}°C",
+              Text("${double.parse(viewModel.currentWeatherData[0].degree ?? "").round()}°C",
                   textScaleFactor: 3),
               CachedNetworkImage(
-                imageUrl: viewModel.currentWeatherData[DateTime.now().weekday - 1].icon ?? "",
+                imageUrl: viewModel.currentWeatherData[0].icon ?? "",
                 placeholder: (context, url) => const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(
                   Icons.sunny,
@@ -116,7 +116,7 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
                 height: 47,
                 // color: HexColor.fromHex("#4D57F0"),
               ),
-              Text(viewModel.currentWeatherData[DateTime.now().weekday - 1].description?.toUpperCase() ?? "",
+              Text(viewModel.currentWeatherData[0].description?.toUpperCase() ?? "",
                   style: TextStyle(color: HexColor.fromHex("#4D57F0")))
             ],
           ),
@@ -188,7 +188,7 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 50, top: 30),
+              padding: const EdgeInsets.only(left: 40.0, right: 40, top: 30),
               child: SizedBox(
                 height: dynamicHeight(0.1),
                 child: Stack(
@@ -208,8 +208,8 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
                       // EN SON DETAYLARDAKİ VERİLERİ GERÇEK VERİLER EŞLİYORDUK. DATETİME.NOW() VERİSİNİ STATE'DE TUT
                       child: oneDetail(
                           text: "hissedilen",
-                          content: "${viewModel.currentWeatherData[DateTime.now().weekday - 1].degree ?? ""}°",
-                          value: double.parse(viewModel.currentWeatherData[DateTime.now().weekday - 1].degree ?? "0") *
+                          content: "${viewModel.currentWeatherData[0].degree ?? ""}°",
+                          value: double.parse(viewModel.currentWeatherData[0].degree ?? "0") *
                               0.02),
                     ),
                   ],
@@ -223,7 +223,7 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
               height: 1,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 50.0, right: 47, top: 30),
+              padding: const EdgeInsets.only(left: 40.0, right: 37, top: 30),
               child: SizedBox(
                 height: dynamicHeight(0.1),
                 child: Stack(
@@ -239,9 +239,9 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
                       top: 0,
                       child: oneDetail(
                           text: "nem",
-                          content: "${viewModel.currentWeatherData[DateTime.now().weekday - 1].humidity ?? ""}%",
+                          content: "${viewModel.currentWeatherData[0].humidity ?? ""}%",
                           value: (double.tryParse(
-                                      viewModel.currentWeatherData[DateTime.now().weekday - 1].humidity ?? "") ??
+                                      viewModel.currentWeatherData[0].humidity ?? "") ??
                                   0) /
                               100),
                     ),
@@ -300,7 +300,7 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
   Widget get weeklyWeatherArea => Column(
         children: [
           SizedBox(
-            height: dynamicHeight(0.02),
+            height: dynamicHeight(0.04),
             child: const Center(
               child: Icon(Icons.keyboard_arrow_down_rounded),
             ),
@@ -360,14 +360,14 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
                   Row(
                     children: [
                       Text(
-                        viewModel.currentWeatherData[DateTime.now().weekday - 1].day ?? "",
+                        viewModel.currentWeatherData[0].day ?? "",
                         style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(
                         width: 15,
                       ),
                       CachedNetworkImage(
-                        imageUrl: viewModel.currentWeatherData[DateTime.now().weekday - 1].icon ?? "",
+                        imageUrl: viewModel.currentWeatherData[0].icon ?? "",
                         placeholder: (context, url) => const CircularProgressIndicator(),
                         errorWidget: (context, url, error) => const Icon(
                           Icons.sunny,
@@ -383,14 +383,14 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
                   Row(
                     children: [
                       Text(
-                        "${double.parse(viewModel.currentWeatherData[DateTime.now().weekday - 1].max ?? "0").round()}°C",
+                        "${double.parse(viewModel.currentWeatherData[0].max ?? "0").round()}°C",
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(
                         width: 8,
                       ),
                       Text(
-                        "${double.parse(viewModel.currentWeatherData[DateTime.now().weekday - 1].min ?? "0").round()}°C",
+                        "${double.parse(viewModel.currentWeatherData[0].min ?? "0").round()}°C",
                         style: const TextStyle(color: Color(0xFF77838F)),
                       ),
                     ],
@@ -455,7 +455,7 @@ class _WeatherScreenState extends BaseState<WeatherScreen> {
                           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          "${viewModel.currentWeatherData[DateTime.now().weekday - 1].humidity ?? ""}%",
+                          "${viewModel.currentWeatherData[0].humidity ?? ""}%",
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
